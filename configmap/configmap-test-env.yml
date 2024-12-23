@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-cm
+data:
+  #Database connection config
+  database: mongodbb
+  database_uri: mongodb://localhost:27017
+
+  #User Interface
+  font.title: Arial Bold
+  background-color: red
+  theme.1: clean
+  theme.2: dark
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-env
+  labels:
+    app: app-java
+spec:
+  containers:
+  - name: mycontainer
+    image: nginx
+    envFrom:
+    - configMapRef: 
+        name: my-cm 
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+      
+         
+
+
+

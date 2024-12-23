@@ -1,0 +1,6 @@
+ database: mongodbb
+ database_uri: mongodb://localhost:27017
+ font.title: Arial Bold
+ background-color: red
+ theme.1: clean
+ theme.2: dark

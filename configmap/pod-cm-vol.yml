@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-vol
+  labels:
+    app: app-java
+spec:
+  containers:
+  - name: mycontainer
+    image: nginx
+    envFrom: # Cria variaveis de ambiente a partir do configmap
+    - configMapRef: 
+        name: my-cm
+    volumeMounts:
+      - name: my-vol
+        mountPath: /etc/my-vol
+        readOnly: true
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+
+  volumes:
+  - name: my-vol
+    configMap:
+      name: my-cm

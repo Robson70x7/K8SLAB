@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resources-pod
+spec:
+  containers:
+    - name: apache
+      image: httpd
+      #Requests são o valor mínimo de recursos por container.
+      #Limits são os valores maximos de recursos por container.
+      resources:  
+        requests:
+          cpu: "500m"
+          memory: "128Mi"
+        limits:
+          cpu: "1000m"
+          memory: "256Mi"
+
+    - name: redis
+      image: redis
+      #Requests são o valor mínimo de recursos por container.
+      #Limits são os valores maximos de recursos por container.
+      resources:  
+        requests:
+          cpu: "400m"
+          memory: "64Mi"
+        limits:
+          cpu: "500m"
+          memory: "128Mi"

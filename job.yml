@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  completions: 10 # numero de pods para criação e execução do comando
+  completionMode: "Indexed" #Gera pods com numero de indexiação 0,1,2,3... 
+  parallelism: 5 #numero de pods criados em paralelo.
+  activeDeadlineSeconds: 15 # Define o tempo maximo de execução do job, caso exceda todos os pods são encerrados com status Failed
+  template:
+    metadata:
+      name: mt-job-pod
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: my-container-busy-box
+        image: busybox
+        command:
+        - "bin/sh"
+        - "-c"
+        - "for i in 1 2; do echo Lucky number $i = $((1 + RANDOM % 70)); done"

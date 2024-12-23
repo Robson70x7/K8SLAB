@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset
+  labels:
+    app: ds-app
+    key: ds-app-key
+
+spec:
+  updateStrategy:
+    # type: OnDelete # As novas alterações nos pods serão aplicadas apenas quando os pods existentes forem removidos manualemnte.
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+  selector:
+    matchLabels:
+      app: my-app
+
+  template: 
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+      
+      # nodeName: minikube-m02 # Esta tag atribui este container apenas em um node especifico, por nome.
+      # nodeSelector: #Esta teg indica que serão criados os container apenas nos nodes com essa label
+      #   disktype: ssd

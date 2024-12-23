@@ -1,0 +1,23 @@
+# Também é possível criar um ConfigMap com um arquivo de configurações existentes no filesystem.
+# com o comando:
+#  kubectl create configmap --from-file=./configmap/my-app-file.txt --from-literal=database=mongodbb --from-literal=database_uri=mongodb://localhost:27017
+# o --from-file cria um ConfigMap com o conteudo do arquivo de configurações.
+# e --from-literal cria um ConfigMap com o conteudo das variaveis de configurações dadas.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-cm
+immutable: true # impede que o configmap seja alterado
+data:
+  #Database connection config
+  my.config.db: | #quando criado com volumes, este modelo cria um arquivo com todos os dados abaixo do | dentro da hierarquia
+    database: mongodb
+    database_uri: mongodb://localhost:27017
+
+  #User Interface
+  my.config.interface: |
+    font.title: Arial Bold
+    background-color: green
+    theme.1: clean
+    theme.2: dark
