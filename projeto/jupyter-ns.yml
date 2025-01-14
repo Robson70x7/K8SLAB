@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jupyter
+  annotations:
+    description: "Namespace para o Jupyter Notebook Aplication"
+    proj: "Final Project k8s - Jupyter Notebook"
+    owner: "Robson Sivla"
+    phone: "999999999"
+    email: "FjY2o@example.com" 
